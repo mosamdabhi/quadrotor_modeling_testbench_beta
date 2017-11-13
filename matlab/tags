@@ -1,0 +1,59 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+InverseQuat	utilities/InverseQuat.m	/^function qFinal = InverseQuat(q)$/;"	f
+MultiplyQuat	utilities/MultiplyQuat.m	/^function qFinal = MultiplyQuat(q1, q2, i)$/;"	f
+NonlinearMeasurementModel	transform_estimator/NonlinearMeasurementModel.m	/^function z = NonlinearMeasurementModel(X)$/;"	f
+ProcessModel	transform_estimator/ProcessModel.m	/^function F = ProcessModel(t, W, a, omega, QuadModel)$/;"	f
+QuadrotorDynamics	QuadrotorDynamics.m	/^function [F] = QuadrotorDynamics(t, W, QuadModel, desRPM)$/;"	f
+QuatToR	utilities/QuatToR.m	/^function R = QuatToR(q)$/;"	f
+RToQuat	utilities/RToQuat.m	/^function q = RToQuat(R)$/;"	f
+RToZYX	utilities/RToZYX.m	/^function euler_zyx = RToZYX(R)$/;"	f
+ZYXToQuat	utilities/ZYXToQuat.m	/^function q = ZYXToQuat(eulerAngles)$/;"	f
+ZYXToR	utilities/ZYXToR.m	/^function R = ZYXToR(eulerAngles)$/;"	f
+attitude_error_calculation	trajectory_generator/attitude_error_calculation.m	/^function [attitudeErr] = attitude_error_calculation(currentState, attCommands, currentQuat, t)$/;"	f
+back_axes	trajectory_generator/supporting_fcns/plot_selected.m	/^function [] = back_axes(mytitle,mylegend)$/;"	f
+circle_xy	trajectory_generator/supporting_fcns/circle_xy.m	/^function [pos_xy, vel_xy, acc_xy, jrk_xy ] = circle_xy(myt, tf, xy_center, r)$/;"	f
+controller_unit_test	unit_tests/controller_unit_test.m	/^function [U] = controller_unit_test()$/;"	f
+error_calculation	trajectory_generator/error_calculation.m	/^function [error] =  error_calculation(currentState, t)$/;"	f
+error_kalman_filter_update	transform_estimator/error_kalman_filter_update.m	/^function [errState_, covEst_] = error_kalman_filter_update(dt, errState, prevCov, stateEst, sys)$/;"	f
+extended_kalman_update	kalman_filter/extended_kalman_update.m	/^function [mean_, cov_] = extended_kalman_update(mean, cov, control, mRes, sys)$/;"	f
+find_dmin_maxv	trajectory_generator/supporting_fcns/find_dmin_maxv.m	/^function [tf, dmin] = find_dmin_maxv(vmax,amax)$/;"	f
+find_tf	trajectory_generator/supporting_fcns/find_tf.m	/^function [tf] = find_tf(dx,vdes,aabs)$/;"	f
+halt	trajectory_generator/supporting_fcns/halt.m	/^function [robot, IB, checkIB, t_end] = halt( elapsed_t, ...$/;"	f
+imu	trajectory_generator/supporting_fcns/imu.m	/^function [IMU] = imu(IMU, tstart, imu_msg)$/;"	f
+init_state	utilities/init_state.m	/^function X = init_state()$/;"	f
+kalman_update	kalman_filter/kalman_update.m	/^function [mean_, cov_] = kalman_update(mean, cov, control, measurement, sys)$/;"	f
+large_angle_attitude_controller	controllers/large_angle_attitude_controller.m	/^function [U] = large_angle_attitude_controller(attErr, u1Des, controller)$/;"	f
+large_angle_position_controller	controllers/large_angle_position_controller.m	/^function [angCommands, u1Des] = large_angle_position_controller(error, currentQuaternion, controller, QuadModel)$/;"	f
+panic	trajectory_generator/supporting_fcns/panic.m	/^function [robot, IB, checkIB, t_end, NOMORE] = panic( elapsed_t, ...$/;"	f
+parse_midi	trajectory_generator/supporting_fcns/parse_midi.m	/^function [Kpq, Komega, Kp_pos, Kd_pos, trims] = parse_midi(keyboard_input, ...$/;"	f
+plot_inner_loop_errors	utilities/plot_inner_loop_errors.m	/^function plot_inner_loop_errors(Y, states)$/;"	f
+plot_kalman	kalman_filter/plot_kalman.m	/^function plot_kalman(t, X, XEst, sigma, z)$/;"	f
+plot_outer_loop_errors	utilities/plot_outer_loop_errors.m	/^function plot_outer_loop_errors(Y, states)$/;"	f
+plot_rpm	utilities/plot_rpm.m	/^function plot_rpm(innerLoopData, rpm) $/;"	f
+plot_selected	trajectory_generator/supporting_fcns/plot_selected.m	/^function [] = plot_selected(ToPlot,ROBOT_HISTORY,ROBOT_TRAJECTORY,IMU,ODOM,looptime,behavior)$/;"	f
+plot_state	transform_estimator/plot_state.m	/^function plot_state(states)$/;"	f
+plot_trajectory_data	utilities/plot_trajectory_data.m	/^function plot_trajectory_data(des, states)$/;"	f
+poly5	trajectory_generator/supporting_fcns/poly5.m	/^function [pos_des,vel_des,acc_des,jrk_des] = poly5(t,tf,start_vals,end_vals)$/;"	f
+quat_struct	utilities/quat_struct.m	/^function q_ = quat_struct(q)$/;"	f
+retrieve_trajectory	trajectory_generator/supporting_fcns/retrieve_trajectory.m	/^function [ROBOT_TRAJECTORY] = retrieve_trajectory(name,start_waypoint,circle_radius)$/;"	f
+sensor_noise	sensor_models/sensor_noise.m	/^function [noisyLinAcc, noisyAngVel] = sensor_noise(linAcc, angVel)$/;"	f
+set_desired	trajectory_generator/supporting_fcns/set_desired.m	/^function [pos_des,vel_des,acc_des,jrk_des] = set_desired(robot, elapsed_t, circle_radius)$/;"	f
+shutdown	trajectory_generator/supporting_fcns/shutdown.m	/^function [robot, IB, checkIB, t_end] = shutdown( elapsed_t, ...$/;"	f
+simulate_IMU	sensor_models/simulate_IMU.m	/^function [a, omega] = simulate_IMU(QuadModel)$/;"	f
+simulate_Vicon	sensor_models/simulate_Vicon.m	/^function [quat, pos] = simulate_Vicon()$/;"	f
+skew	trajectory_generator/supporting_fcns/skew.m	/^function S = skew(W)$/;"	f
+skewmat	utilities/skewmat.m	/^function v_hat = skewmat(v)$/;"	f
+small_angle_attitude_controller	controllers/smallanglecontrol/small_angle_attitude_controller.m	/^function [U] = small_angle_attitude_controller(eEuler, eAngVel, u1Des)$/;"	f
+small_angle_control_main	controllers/smallanglecontrol/small_angle_control_main.m	/^function [constrainedRPM, innerLoopData, outerLoopData] = small_angle_control_main(currentState, t)$/;"	f
+small_angle_position_controller	controllers/smallanglecontrol/small_angle_position_controller.m	/^function [phiDes, thetaDes, u1Des] = small_angle_position_controller(errorPosition, errorVelocity, commandHeading, commandAcc)$/;"	f
+solve_using_rk4	solvers/solve_using_rk4.m	/^function [W_final, lin_ang_accel_save] = solve_using_rk4(t, W, QuadModel, desRPM, h)$/;"	f
+traj_gen_ipcBased	trajectory_generator/traj_gen_ipcBased.m	/^function [pos_des, vel_des, acc_des, jrk_des] =  traj_gen_ipcBased(odom)$/;"	f
+traj_param	trajectory_generator/traj_param.m	/^function [des_state_pos, des_state_vel, des_state_acc] = traj_param(t)$/;"	f
+vee	utilities/vee.m	/^function [output_vector] = vee(in)$/;"	f
+vicon	trajectory_generator/supporting_fcns/vicon.m	/^function [ODOM] = vicon(ODOM, tstart, odom_msg)$/;"	f
+vicon_lite	trajectory_generator/supporting_fcns/vicon_lite.m	/^function [ODOM] = vicon_lite(ODOM, tstart, odom_msg)$/;"	f
