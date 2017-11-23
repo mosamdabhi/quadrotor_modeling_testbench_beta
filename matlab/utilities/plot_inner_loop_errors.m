@@ -4,6 +4,7 @@ function plot_inner_loop_errors(Y, states)
     grid on;
     figure(1);
     subplot(3,1,1);plot(states(:,1),states(:,11)*r2d, 'LineWidth', 1.5);xlabel('time', 'FontSize', 20);ylabel('\phi', 'FontSize', 20);
+
     grid on; 
     set(gca,'fontsize',12,'FontWeight','bold');
     hold on;

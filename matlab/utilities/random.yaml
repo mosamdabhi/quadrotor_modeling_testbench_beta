@@ -1,0 +1,45 @@
+mass: 3.330
+gravity: 9.80665
+zoffset: 0.26 
+inertia:
+  Ixx: 0.04
+  Iyy: 0.04
+  Izz: 0.07
+  Ixy: 0.00
+  Ixz: 0.00
+  Iyz: 0.00
+yaw_offset: 0.0
+num_rotors: 6
+arm:
+  length:
+    front: 0.275
+    middle: 0.275
+    back: 0.275
+  angle:
+    front: 0.5236
+    middle: 1.5708
+    back: 2.6180
+gains:
+  motor: 10.35 
+  thrust: 1.42e-7
+  moment_scale: 0.015
+  rotor:
+    use_full_quadratic: true
+    cT0: 0.035462
+    cT1: -0.00015262
+    cT2: 1.6025e-7
+pwm:
+  disarmed: 900
+  low: 1000
+  high: 2130
+rpm:
+  min: 2500
+  idle: 2700
+  max: 9500
+battery:
+  voltage_max: 16.5
+  voltage: {V0: 16.5, V1: 15.5, V2: 14.3, V3: 7.0}
+  time: {t1: 75, t2: 900, t3: 1000}
+drag_model:
+  cD: 0.029
+  effective_tippathplane_z: 0.1

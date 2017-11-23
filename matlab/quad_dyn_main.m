@@ -27,21 +27,32 @@
 %
 % U : Desired RPMs X(23:26)
 
-%% Clear everything in workspace
-clc;
-clear;
-close all;
+function quad_dyn_main(actualTheta)
+
 %% Add paths to required folders
 addpath('sensor_models');
 addpath('classes');
 addpath('utilities');
-addpath('controllers/smallanglecontrol');
 addpath('controllers');
 addpath('solvers');
 addpath('trajectory_generator');
+addpath('transform_estimator');
 
 %% Initialize state vector, vehicle object and trajectory selection
-hulk1c = QuadrotorModel;
+if actualTheta == 1
+    hulk1c = QuadrotorModel;
+    theta_actual = [hulk1c.cT; hulk1c.cTorque; 0; diag(hulk1c.I); hulk1c.rOffset];
+else
+    hulk1c = QuadrotorModel2;
+    theta_bar = [hulk1c.cT; hulk1c.cTorque; 0; diag(hulk1c.I); hulk1c.rOffset];
+end
+
+
+if actualTheta == 1
+    save('../matlab/transform_estimator/Mat_file_logs/theta_actual.mat', 'theta_actual');
+else
+    save('../matlab/transform_estimator/Mat_file_logs/theta_bar.mat', 'theta_bar');
+end
 
 prompt = 'End time (in seconds) : ';
 t_final = input(prompt);
@@ -60,7 +71,8 @@ str = {'Circle', ...
        'Butterfly Curve', ...
        'TakeOff', ...
        'Spiral Circle', ...
-       'Circle_MultiDimensional'};
+       'Circle_MultiDimensional', ...
+       'Back&Forth'};
 [s,v] = listdlg('PromptString','Select a trajectory:',...
                 'SelectionMode','single','ListSize',[300 300],...
                 'ListString',str);
@@ -132,7 +144,8 @@ for i = 1:(length(timespan)-1)
     % Store data for post processing
     outerLoopData(i,:) = error.outerLoopData;
     innerLoopData(i,:) = attErr.innerLoopData;  
-
+    
+    U(:, i) = hulk1c.constrained_control_inputs(W(13:16));
    % solve dynamics numerically using 4th order Runge-Kutta Method
    [W(:,i+1), lin_ang_accel_save(i,:)] = solve_using_rk4(t(i), W(:,i), hulk1c, rpm(i,:), h);
    
@@ -144,15 +157,45 @@ end
 toc; % End simulation time
 lin_vel_store = W(1:3,:);
 %% Saving MAT files
-mkdir ../matlab/sensor_models/ DataLog
-save ('../matlab/sensor_models/DataLog/quat_save.mat', 'quat_save');
-save ('../matlab/sensor_models/DataLog/ang_vel_save.mat', 'ang_vel_save');
-save ('../matlab/sensor_models/DataLog/lin_ang_accel_save.mat', 'lin_ang_accel_save');
-save ('../matlab/sensor_models/DataLog/time.mat', 't');
-save ('../matlab/sensor_models/DataLog/lin_vel.mat', 'lin_vel_store');
-Y = vertcat(t', W);
+if actualTheta == 1
+    mkdir ../matlab/sensor_models/DataLog;
+    save ('../matlab/sensor_models/DataLog/quat_save.mat', 'quat_save');
+    save ('../matlab/sensor_models/DataLog/ang_vel_save.mat', 'ang_vel_save');
+    save ('../matlab/sensor_models/DataLog/lin_ang_accel_save.mat', 'lin_ang_accel_save');
+    save ('../matlab/sensor_models/DataLog/time.mat', 't');
+    save ('../matlab/sensor_models/DataLog/lin_vel.mat', 'lin_vel_store');
+    save ('../matlab/sensor_models/DataLog/FTotalMTotal.mat', 'U');
+end
+
+%% Converting to different state variable
+for i = 1:length(W(10:12,:))
+    new_q = ZYXToQuat(W(10:12,i));
+    new_quat(1,i) = new_q.x;
+    new_quat(2,i) = new_q.y;
+    new_quat(3,i) = new_q.z;
+    new_quat(4,i) = new_q.w;
+    new_rB(1:3,i) = W(7:9,i);
+    new_vB(1:3,i) = W(1:3,i);
+    new_omegaB(1:3,i) = W(4:6,i);
+    new_rpm(1:4,i) = W(13:16,i);
+    new_noise(1:6,i) = W(17:22,i);
+end
+new_W = vertcat(new_rB, new_vB, new_quat, new_omegaB, new_noise, new_rpm);
+
+if actualTheta == 1
+    measurement_Z = vertcat(new_rB, new_vB, new_quat);
+    save('../matlab/transform_estimator/Mat_file_logs/measurement_Z.mat', 'measurement_Z');
+    save('../matlab/transform_estimator/Mat_file_logs/U_rpm_MAV.mat', 'rpm');
+else
+    save('../matlab/transform_estimator/Mat_file_logs/X_bar.mat', 'new_W');
+end
+    
+Y_forInnerLoop = vertcat(t', W);
+Y_forInnerLoop = Y_forInnerLoop';
+Y = vertcat(t', new_W);
 Y = Y';
 else
+    
 tic; % Start simulation time
 for i = 1:(length(timespan)-1)
    % Display time
@@ -188,14 +231,22 @@ for i = 1:(length(timespan)-1)
    % update time
    t(i+1) = t(i) + h;  
 end
-toc; % End simulation time   
+toc; % End simulation time
+
+for ii = 1:(length(timespan)-1)
+    q = W(7:10, ii);
+    W(7:9, ii) = QuatToZYX(q);
+    W(10:22, ii) = W(11:23, ii);
+end
+
 Y = vertcat(timeVec, W);
 Y = Y';
 end
 
 %% Plot results
-plot_inner_loop_errors(innerLoopData, Y);
+plot_inner_loop_errors(innerLoopData, Y_forInnerLoop);
 plot_outer_loop_errors(outerLoopData, Y);
 plot_trajectory_data(outerLoopData, Y);
 
 plot_rpm(innerLoopData, rpm);
+end

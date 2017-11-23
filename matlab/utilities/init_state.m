@@ -51,6 +51,10 @@ switch sel_traj
         X(7) = 1;
         X(8) = 0;
         X(9) = 3;           
+    case 'Back&Forth'
+        X(7) = 0;
+        X(8) = 0;
+        X(9) = 1;                   
     otherwise
         display('Invalid initial state');
  

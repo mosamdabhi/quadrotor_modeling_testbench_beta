@@ -1,7 +1,7 @@
 function plot_trajectory_data(des, states)
     figure;
     grid on;
-    plot3(states(:,8), states(:,9), states(:,10), 'LineWidth', 1.5);
+    plot3(states(:,2), states(:,3), states(:,4), 'LineWidth', 1.5);
     hold on;
     plot3(des(:,8), des(:,9), des(:,10), 'LineWidth', 1.5);
     axis([-4 4 -4 4 0 10]);

@@ -227,6 +227,135 @@ switch sel_traj
             des_state_acc(3) = -sin(t);                    
         end
 
+    case 'Back&Forth'
+%         h=3;
+%         for jen=1:h
+%             if jen==1
+%                 for t=0:0.001:4
+%                     if t <= 2
+%                         des_state_pos(1) = 1;
+%                         des_state_pos(2) = 0;
+%                         des_state_pos(3) = 1;
+%                         des_state_vel(1) = 0;
+%                         des_state_vel(2) = 0;
+%                         des_state_vel(3) = 0;
+%                         des_state_acc(1) = 0;
+%                         des_state_acc(2) = 0;
+%                         des_state_acc(3) = 0;                         
+%                     else
+%                         des_state_pos(1) = 0;
+%                         des_state_pos(2) = 0;
+%                         des_state_pos(3) = 1;
+%                         des_state_vel(1) = 0;
+%                         des_state_vel(2) = 0;
+%                         des_state_vel(3) = 0;
+%                         des_state_acc(1) = 0;
+%                         des_state_acc(2) = 0;
+%                         des_state_acc(3) = 0;                                                 
+%                     end
+%                 end
+%             else
+%                 for t=4*(jen-1):0.001:4*(jen-1)+4
+%                     if t >= 4*(jen-1) && t <= 4*(jen-1) + 2
+%                         des_state_pos(1) = 1;
+%                         des_state_pos(2) = 0;
+%                         des_state_pos(3) = 1;
+%                         des_state_vel(1) = 0;
+%                         des_state_vel(2) = 0;
+%                         des_state_vel(3) = 0;
+%                         des_state_acc(1) = 0;
+%                         des_state_acc(2) = 0;
+%                         des_state_acc(3) = 0;                         
+%                     else
+%                         des_state_pos(1) = 0;
+%                         des_state_pos(2) = 0;
+%                         des_state_pos(3) = 1;
+%                         des_state_vel(1) = 0;
+%                         des_state_vel(2) = 0;
+%                         des_state_vel(3) = 0;
+%                         des_state_acc(1) = 0;
+%                         des_state_acc(2) = 0;
+%                         des_state_acc(3) = 0;                         
+%                     end
+%                 end
+%             end
+% 
+%         end        
+        % position
+        if t <= 5
+            des_state_pos(1) = 1; 
+            des_state_pos(2) = 0; 
+            des_state_pos(3) = 1;
+            % velocity
+            des_state_vel(1) = 0;
+            des_state_vel(2) = 0;
+            des_state_vel(3) = 0;
+            % acceleration (feedforward term)
+            des_state_acc(1) = 0;
+            des_state_acc(2) = 0;
+            des_state_acc(3) = 0;        
+        elseif t > 5 && t <= 10
+            des_state_pos(1) = 0; 
+            des_state_pos(2) = 0; 
+            des_state_pos(3) = 1;
+            % velocity
+            des_state_vel(1) = 0;
+            des_state_vel(2) = 0;
+            des_state_vel(3) = 0;
+            % acceleration (feedforward term)
+            des_state_acc(1) = 0;
+            des_state_acc(2) = 0;
+            des_state_acc(3) = 0;  
+        elseif t > 10 && t <= 15
+            des_state_pos(1) = 1; 
+            des_state_pos(2) = 0; 
+            des_state_pos(3) = 1;
+            % velocity
+            des_state_vel(1) = 0;
+            des_state_vel(2) = 0;
+            des_state_vel(3) = 0;
+            % acceleration (feedforward term)
+            des_state_acc(1) = 0;
+            des_state_acc(2) = 0;
+            des_state_acc(3) = 0;                          
+        elseif t > 15 && t <= 20
+            des_state_pos(1) = 0; 
+            des_state_pos(2) = 0; 
+            des_state_pos(3) = 1;
+            % velocity
+            des_state_vel(1) = 0;
+            des_state_vel(2) = 0;
+            des_state_vel(3) = 0;
+            % acceleration (feedforward term)
+            des_state_acc(1) = 0;
+            des_state_acc(2) = 0;
+            des_state_acc(3) = 0;  
+        elseif t > 20 && t <= 25
+            des_state_pos(1) = 1; 
+            des_state_pos(2) = 0; 
+            des_state_pos(3) = 1;
+            % velocity
+            des_state_vel(1) = 0;
+            des_state_vel(2) = 0;
+            des_state_vel(3) = 0;
+            % acceleration (feedforward term)
+            des_state_acc(1) = 0;
+            des_state_acc(2) = 0;
+            des_state_acc(3) = 0;                          
+        else
+            des_state_pos(1) = 0; 
+            des_state_pos(2) = 0; 
+            des_state_pos(3) = 1;
+            % velocity
+            des_state_vel(1) = 0;
+            des_state_vel(2) = 0;
+            des_state_vel(3) = 0;
+            % acceleration (feedforward term)
+            des_state_acc(1) = 0;
+            des_state_acc(2) = 0;
+            des_state_acc(3) = 0;                                      
+        end        
+
         
     otherwise
             display('Given trajectory not identified');

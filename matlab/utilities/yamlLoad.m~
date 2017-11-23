@@ -1,0 +1,6 @@
+clc; clear all;  
+
+yaml_map = yamlread('/home/mosam/Documents/quadrotor_modeling_testbench/matlab/utilities/R2.yaml')
+
+MappedParam = yaml_map.keys;
+MappedValues = yaml_map.values;
