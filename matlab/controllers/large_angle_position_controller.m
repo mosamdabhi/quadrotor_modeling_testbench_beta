@@ -11,7 +11,8 @@ function [angCommands, u1Des] = large_angle_position_controller(error, currentQu
  commandHeading = error.heading;
  
  % Desired force in world frame.
- FDes = m*(kp.*errorPosition + kv.*errorVelocity + [0; 0; g] + commandAcc);
+%  FDes = m*(kp.*errorPosition + kv.*errorVelocity + [0; 0; g] + commandAcc);
+FDes = epc_init(errorPosition, errorVelocity, commandAcc);
  
  R = QuatToR(currentQuaternion); % Compute rotation matrix body to world
  z_b = R(:,3); % Body Z
